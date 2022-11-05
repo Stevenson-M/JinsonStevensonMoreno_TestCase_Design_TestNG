@@ -26,7 +26,7 @@ public class DeactivateUserTest {
     }
 
     @Test
-    public void loginTest() {
+    public void deactivateUserTest() {
         logger.info("Click in the top right button");
         logger.info("Click in the 'Log In' button");
         logger.info("Type the username");
