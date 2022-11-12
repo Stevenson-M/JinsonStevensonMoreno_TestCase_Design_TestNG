@@ -1,4 +1,4 @@
-package org.globant.configuration;
+package org.espn.configuration;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 

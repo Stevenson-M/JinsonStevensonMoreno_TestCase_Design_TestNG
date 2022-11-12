@@ -1,12 +1,11 @@
-package org.globant.pages;
+package org.espn.pages;
 
-import org.globant.configuration.WebOperations;
+import org.espn.configuration.WebOperations;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class BasePage extends WebOperations {
-
 
     @FindBy(id = "global-header")
     private WebElement globalHeader;
@@ -23,6 +22,11 @@ public class BasePage extends WebOperations {
 
     public void clickWatchButton() {
         clickElement(watchButton);
+    }
+
+    public WatchPage goToWatchPage() {
+        clickWatchButton();
+        return new WatchPage(getDriver());
     }
 
     public BasePage(WebDriver driver) {

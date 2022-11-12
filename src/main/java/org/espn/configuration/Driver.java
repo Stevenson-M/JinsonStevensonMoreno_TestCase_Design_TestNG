@@ -1,4 +1,4 @@
-package org.globant.configuration;
+package org.espn.configuration;
 
 import  io.github.bonigarcia.wdm.WebDriverManager;
 

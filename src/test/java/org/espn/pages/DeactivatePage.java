@@ -1,4 +1,4 @@
-package org.globant.pages;
+package org.espn.pages;
 
 public class DeactivatePage {
 }

@@ -1,13 +1,15 @@
-package org.globant.tests;
+package org.espn.tests;
 
 import static java.lang.String.format;
-
-import org.globant.pages.BasePage;
+import org.hamcrest.Matcher;
+import org.espn.pages.BasePage;
+import org.hamcrest.MatcherAssert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.globant.configuration.Driver;
-import org.globant.reporting.Reporter;
 import org.testng.annotations.Parameters;
+import org.espn.configuration.Driver;
+import org.espn.reporting.Reporter;
+
 
 
 public class BaseTest {
@@ -33,5 +35,14 @@ public class BaseTest {
         driver.getDriver().quit();
     }
 
+        protected <T> void checkThat (String description, T actualValue, Matcher<? super T>  expectedValue){
+            Reporter.info(
+                    format("Checking that " + description.toLowerCase() + "[Expectation: %s]", expectedValue));
+            try {
+                MatcherAssert.assertThat(actualValue, expectedValue);
+            } catch (AssertionError e) {
+                Reporter.error(format("Assertion Error: [%s]", e.getMessage().replaceAll("/n", "")));
+            }
+        }
 
 }

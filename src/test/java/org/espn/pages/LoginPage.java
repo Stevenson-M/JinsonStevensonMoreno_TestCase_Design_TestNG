@@ -1,4 +1,4 @@
-package org.globant.pages;
+package org.espn.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,16 +27,16 @@ public class LoginPage extends BasePage {
         getDriver().switchTo().frame(loginIframe);
     }
 
-    public void checkEspnLogoIsPresent(){
-        checkElementIsPresent(EspnLogo);
+    public boolean checkEspnLogoIsPresent(){
+        return EspnLogo.isDisplayed();
     }
 
-    public void checkSingUpButtonIsPresent(){
-        checkElementIsPresent(SingUpButton);
+    public boolean checkSingUpButtonIsPresent(){
+        return SingUpButton.isDisplayed();
     }
 
-    public void checkLoginButtonIsPresent(){
-        checkElementIsPresent(LoginButton);
+    public boolean checkLoginButtonIsPresent(){
+        return LoginButton.isDisplayed();
     }
 
     public void clickEmailInput() {

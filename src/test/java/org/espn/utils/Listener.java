@@ -1,8 +1,8 @@
-package org.globant.utils;
+package org.espn.utils;
 
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import org.globant.reporting.Reporter;
+import org.espn.reporting.Reporter;
 
 public class Listener implements ITestListener {
     @Override
