@@ -24,6 +24,7 @@ public class WebOperations {
     }
 
     public void clickElement(WebElement element) {
+        waitForVisibility(element);
         waitForClickable(element);
         element.click();
     }
@@ -43,4 +44,16 @@ public class WebOperations {
     public void waitForClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
+    public void checkElementIsPresent(WebElement element) {
+        waitForVisibility(element);
+        element.isDisplayed();
+    }
+
+    public void goToUrl(String url) {
+        driver.get(url);
+    }
+
+
+
 }

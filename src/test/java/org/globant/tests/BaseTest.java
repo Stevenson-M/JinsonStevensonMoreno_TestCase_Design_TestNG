@@ -2,10 +2,10 @@ package org.globant.tests;
 
 import static java.lang.String.format;
 
+import org.globant.pages.BasePage;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.globant.configuration.Driver;
-import org.globant.pages.MainPage;
 import org.globant.reporting.Reporter;
 import org.testng.annotations.Parameters;
 
@@ -13,7 +13,7 @@ import org.testng.annotations.Parameters;
 public class BaseTest {
 
     public Driver driver;
-    protected MainPage mainPage;
+    protected BasePage mainPage;
 
     @Parameters({"browser", "url"})
     @BeforeTest()
@@ -24,7 +24,7 @@ public class BaseTest {
         Reporter.info(format("Navigating to %s", url));
         driver.getDriver().get(url);
         driver.getDriver().manage().window().maximize();
-        mainPage = new MainPage(driver.getDriver());
+        mainPage = new BasePage(driver.getDriver());
     }
 
     @AfterTest

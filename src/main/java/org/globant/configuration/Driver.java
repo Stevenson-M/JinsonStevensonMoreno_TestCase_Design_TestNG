@@ -9,8 +9,6 @@ import  org.openqa.selenium.edge.EdgeDriver;
 import  org.openqa.selenium.safari.SafariDriver;
 
 
-
-
 public class Driver {
 
     private WebDriver driver;
