@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class UserPage extends BasePage {
 
-    @FindBy(css="div[class='global-user'][style^='left'] a[data-affiliatename='espn']")
+    @FindBy(css="div.global-user:last-child ul.account-management > li:last-child > a")
     private WebElement loginUserMenuButton;
 
     public void clickLoginButton() {

@@ -7,18 +7,15 @@ import org.espn.pages.WatchPage;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.nullValue;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.hasSize;
+
 
 public class EspnTest extends BaseTest {
 
+    private final String userName = "Frank";
+
     @Test
     @Parameters({"email", "password"})
-    public void loginTest(String email, String password) {
+    public void EspnTest(String email, String password) {
         BasePage mainPage = new BasePage(driver.getDriver());
         mainPage.clickGlobalUserMenu();
         UserPage userPage = new UserPage(driver.getDriver());
@@ -33,19 +30,23 @@ public class EspnTest extends BaseTest {
         loginPage.clickPasswordInput();
         loginPage.typePasswordInput(password);
         loginPage.clickLoginButton();
-        BasePage MainPage2 = new BasePage(driver.getDriver());
-        MainPage2.goToWatchPage();
+        BasePage mainPage2 = new BasePage(driver.getDriver());
+        mainPage2.goToWatchPage();
         WatchPage watchPage = new WatchPage(driver.getDriver());
         checkThat("There is at least one carousel displayed", watchPage.checkCarouselsArePresent(), is(true));
-
         watchPage.clickSecondCarouselItem();
-
-
-
-
-
-
-
+        /**watchPage.changeToSupplierIframe();
+        /**watchPage.checkXButtonIsPresent();
+        /**watchPage.clickXButton();*/
+        /**watchPage.changeToBasePage();*/
+        watchPage.returnToMainPage();
+        BasePage mainPage3 = new BasePage(driver.getDriver());
+        mainPage3.hoverGlobalUserMenu();
+        mainPage3.clickGlobalUserMenu();
+        UserPage userPage2 = new UserPage(driver.getDriver());
+        checkThat("User Menu has a welcome message with the name of the user", userPage2.validateNavText(userName), is(true));
+        userPage2.clickLogOutButton();
+        checkThat("User Menu has a welcome message without the name of the user", userPage2.validateNavText(userName), is(false));
 
 
     }

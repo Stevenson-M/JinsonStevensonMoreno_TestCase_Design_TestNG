@@ -8,8 +8,10 @@
     <parameter name="url" value="https://www.espnqa.com/?src=com&amp;_adblock=true&amp;espn=cloud"></parameter>
     <parameter name="browser" value="chrome"></parameter>
 
-    <parameter name="email" value="stevensonpruebaespn@gmail.com"></parameter>
-    <parameter name="password" value="Prueba1ESPN"></parameter>
+
+
+    <parameter name="email" value="askim8610@gmail.com"></parameter>
+    <parameter name="password" value="Frank861028"></parameter>
 
     <test name="Espn Test" >
         <classes>

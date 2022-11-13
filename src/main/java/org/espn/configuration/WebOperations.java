@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -29,6 +30,13 @@ public class WebOperations {
         element.click();
     }
 
+    public void hoverElement(WebElement element) {
+        waitForVisibility(element);
+        waitForClickable(element);
+        Actions action = new Actions(driver);
+        action.moveToElement(element).build().perform();
+    }
+
     public void typeOnInput(WebElement element, String text) {
         element.sendKeys(text);
     }
@@ -43,15 +51,6 @@ public class WebOperations {
 
     public void waitForClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
-    public void checkElementIsPresent(WebElement element) {
-        waitForVisibility(element);
-        element.isDisplayed();
-    }
-
-    public void goToUrl(String url) {
-        driver.get(url);
     }
 
 
