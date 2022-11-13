@@ -10,22 +10,22 @@
 
 
 
-    <parameter name="email" value="stevensonpruebaespn@gmail.com"></parameter>
-    <parameter name="password" value="Prueba1ESPN"></parameter>
+    <parameter name="email" value="Test100111@gmail.com"></parameter>
+    <parameter name="password" value="Test12345"></parameter>
 
-    <test name="Espn Login Test" >
+    <test name="Espn Login Test" enabled="true" >
         <classes>
             <class name="org.espn.tests.EspnLoginTest" />
         </classes>
     </test>
 
-    <test name="Espn Logout Test" >
+    <test name="Espn Logout Test" enabled="true" >
         <classes>
             <class name="org.espn.tests.EspnLogoutTest" />
         </classes>
     </test>
 
-    <test name="Espn Deactivate Account Test" >
+    <test name="Espn Deactivate Account Test" enabled="false" >
         <classes>
             <class name="org.espn.tests.EspnDeactivateAccountTest" />
         </classes>
