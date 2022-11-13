@@ -8,14 +8,11 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import static org.hamcrest.Matchers.is;
 
-
-public class EspnTest extends BaseTest {
-
-    private final String userName = "Frank";
+public class EspnLoginTest extends BaseTest {
 
     @Test
     @Parameters({"email", "password"})
-    public void EspnTest(String email, String password) {
+    public void EspnLoginTest(String email, String password) {
         BasePage mainPage = new BasePage(driver.getDriver());
         mainPage.clickGlobalUserMenu();
         UserPage userPage = new UserPage(driver.getDriver());
@@ -33,24 +30,20 @@ public class EspnTest extends BaseTest {
         BasePage mainPage2 = new BasePage(driver.getDriver());
         mainPage2.goToWatchPage();
         WatchPage watchPage = new WatchPage(driver.getDriver());
-        checkThat("There is at least one carousel displayed", watchPage.checkCarouselsArePresent(), is(true));
-        watchPage.clickSecondCarouselItem();
-        /**watchPage.changeToSupplierIframe();
-        /**watchPage.checkXButtonIsPresent();
-        /**watchPage.clickXButton();*/
-        /**watchPage.changeToBasePage();*/
+        checkThat("There is at least one carousel displayed", watchPage.checkCarouselsArePresent(), is(true));//
+        watchPage.clickSecondCarouselCard();
+        watchPage.switchToCarouselPopUp();
+        checkThat("Carousel the close button in the carousel pop up is present and visible", watchPage.checkCarouselCloseBottomPopUpIsPresent(), is(true));
+        watchPage.clickCloseButtonCarouselPopUp();
         watchPage.returnToMainPage();
         BasePage mainPage3 = new BasePage(driver.getDriver());
         mainPage3.hoverGlobalUserMenu();
-        mainPage3.clickGlobalUserMenu();
         UserPage userPage2 = new UserPage(driver.getDriver());
-        checkThat("User Menu has a welcome message with the name of the user", userPage2.validateNavText(userName), is(true));
+        checkThat("User Menu has a welcome message with the name of the user", userPage2.checkNavUserMenuWelcomeText(WelcomeMessageInNav), is(true));
         userPage2.clickLogOutButton();
-        checkThat("User Menu has a welcome message without the name of the user", userPage2.validateNavText(userName), is(false));
-
-
+        BasePage mainPage4 = new BasePage(driver.getDriver());
+        mainPage4.hoverGlobalUserMenu();
+        UserPage userPage3 = new UserPage(driver.getDriver());
+        checkThat("User Menu has a welcome message without the name of the user", userPage3.checkNavUserMenuWelcomeText(WelcomeMessageInNav), is(false));
     }
-
-
-
 }

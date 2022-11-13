@@ -10,12 +10,12 @@ import org.testng.annotations.Parameters;
 import org.espn.configuration.Driver;
 import org.espn.reporting.Reporter;
 
-
-
 public class BaseTest {
 
     public Driver driver;
     protected BasePage mainPage;
+    protected final String userName = "Test";
+    protected final String WelcomeMessageInNav = "Welcome" + userName + "!";
 
     @Parameters({"browser", "url"})
     @BeforeTest()
