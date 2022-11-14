@@ -26,22 +26,20 @@ public class UserPage extends BasePage {
     @FindBy(id="AccountDeleteLink")
     private WebElement DeactivateAccountButton;
 
-    @FindBy(id="BtnSubmit")
+    @FindBy(css = "#TextBlock + #BtnSubmit")
     private WebElement DeactivateAccountConfirmationButton;
 
-    @FindBy(xpath = "root > div:nth-child(3) > div > div > div:nth-child(1)")
-    private WebElement DeactivateModalMessageWindow;
+    @FindBy (css = "#TextError + #BtnSubmit")
+    private  WebElement DeactivateAccountConfirmationIframe;
 
-    @FindBy(id = "BtnSubmit")
-    private WebElement DeactivateModalMessageWindowButtonConfirmation;
-
-
+    @FindBy (css = ".account-deleted-gating + #Title")
+    private  WebElement deleteAccountConfirmationTextWhenLogIn;
 
     public void clickLoginButton() {
         clickElement(loginUserMenuButton);
     }
 
-    public boolean checkNavUserMenuWelcomeText(String text) {
+    public Boolean checkNavUserMenuWelcomeText(String text) {
         return NavUserMenuWelcomeText.getText().contains(text);
     }
 
@@ -68,31 +66,20 @@ public class UserPage extends BasePage {
     public void clickDeactivateAccountConfirmationButton() {
         clickElement(DeactivateAccountConfirmationButton);
     }
-    String PrincipalWindow = getDriver().getWindowHandle();
-    public void switchToConfirmationDeactivatePopUp(){
-        waitForVisibility(DeactivateModalMessageWindow);
 
-        Set<String> windowHandles = getDriver().getWindowHandles();
-        Iterator<String> i1 = windowHandles.iterator();
-
-        while (i1.hasNext()) {
-            String ChildWindow = i1.next();
-            if (!PrincipalWindow.equalsIgnoreCase(ChildWindow)) {
-                getDriver().switchTo().window(ChildWindow);
-
-                getDriver().close();
-            }
-        }
-        getDriver().switchTo().window(PrincipalWindow);
+    public void clickDeactivateAccountConfirmationIframe() {
+        clickElement(DeactivateAccountConfirmationIframe);
     }
 
-    public boolean checkDeactivateModalMessageWindowIsPresent(){
-        return DeactivateModalMessageWindow.isDisplayed();
+    public void goOutFromDeactivateAccountConfirmationIframe() {
+        super.getDriver().switchTo().defaultContent();
     }
 
-    public void clickDeactivateModalMessageWindowButtonConfirmation() {
-        clickElement(DeactivateModalMessageWindowButtonConfirmation);
+    public boolean deleteAccountConfirmationTextWhenLogIn(String text) {
+        waitForVisibility(deleteAccountConfirmationTextWhenLogIn);
+        return deleteAccountConfirmationTextWhenLogIn.getText().contains(text);
     }
+
 
     public UserPage(WebDriver driver) {
         super(driver);

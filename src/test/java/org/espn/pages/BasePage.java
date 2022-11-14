@@ -29,10 +29,16 @@ public class BasePage extends WebOperations {
         return new WatchPage(getDriver());
     }
 
+    public void refreshPage() {
+        getDriver().navigate().refresh();
+    }
+    public void waitForGlobalUserMenu() {
+        waitForVisibility(this.globalUserMenu);
+    }
+
     public void hoverGlobalUserMenu() {
         hoverElement(globalUserMenu);
     }
-
 
     public BasePage(WebDriver driver) {
         super(driver);

@@ -30,7 +30,9 @@ public class EspnLoginTest extends BaseTest {
         BasePage mainPage2 = new BasePage(driver.getDriver());
         mainPage2.goToWatchPage();
         WatchPage watchPage = new WatchPage(driver.getDriver());
-        checkThat("There is at least one carousel displayed", watchPage.checkCarouselsArePresent(), is(true));//
+        checkThat("There is at least one carousel displayed", watchPage.checkCarouselsArePresent(), is(true));
+        checkThat("The carousel cards have a title", watchPage.checkAllCarouselCardsTitleIsPresent(), is(true));
+        checkThat("The carousel cards have a description", watchPage.checkAllCarouselCardsDescriptionIsPresent(), is(true));
         watchPage.clickSecondCarouselCard();
         watchPage.switchToCarouselPopUp();
         checkThat("Carousel the close button in the carousel pop up is present and visible", watchPage.checkCarouselCloseBottomPopUpIsPresent(), is(true));

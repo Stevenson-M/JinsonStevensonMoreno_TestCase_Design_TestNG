@@ -16,7 +16,7 @@ public class WebOperations {
 
     public WebOperations(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5L));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20L));
         initElements(driver, this);
     }
 
@@ -33,7 +33,7 @@ public class WebOperations {
     public void hoverElement(WebElement element) {
         waitForVisibility(element);
         waitForClickable(element);
-        Actions action = new Actions(driver);
+        Actions action = new Actions(getDriver());
         action.moveToElement(element).build().perform();
     }
 
@@ -52,7 +52,4 @@ public class WebOperations {
     public void waitForClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
-
-
-
 }

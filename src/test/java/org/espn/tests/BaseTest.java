@@ -16,6 +16,7 @@ public class BaseTest {
     protected BasePage mainPage;
     protected final String userName = "Test";
     protected final String WelcomeMessageInNav = "Welcome" + userName + "!";
+    protected final String DeactivateAccountConfirmationTextWhenLogin = "Account Deactivated";
 
     @Parameters({"browser", "url"})
     @BeforeTest()

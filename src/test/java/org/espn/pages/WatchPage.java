@@ -1,9 +1,11 @@
 package org.espn.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -12,6 +14,9 @@ public class WatchPage extends BasePage {
 
     @FindBy(css = "section.Carousel")
     private List<WebElement> carousels;
+
+    @FindBy(css = "div.Carousel__Wrapper--canScrollRight ul.Carousel__inner li")
+    private List<WebElement> carouselCards;
 
     @FindBy(css = "div.Carousel__Wrapper--canScrollRight ul.Carousel__Inner li:nth-child(2) > a")
     private WebElement secondCarouselCard;
@@ -24,6 +29,20 @@ public class WatchPage extends BasePage {
 
     public Boolean checkCarouselsArePresent() {
         return carousels.size() > 0;
+    }
+
+    public boolean checkAllCarouselCardsTitleIsPresent() {
+        List<Boolean> carouselCardsTitle = new ArrayList<>();
+        carouselCards.stream().forEach(element -> {carouselCardsTitle.add(element.findElement(By.cssSelector("h2.WatchTile__Title")).isEnabled());
+    });
+        return !carouselCardsTitle.contains(false);
+    }
+
+    public boolean checkAllCarouselCardsDescriptionIsPresent() {
+        List<Boolean> carouselCardsDescription = new ArrayList<>();
+        carouselCards.stream().forEach(element -> {carouselCardsDescription.add(element.findElement(By.cssSelector(".WatchTile__Meta")).isEnabled());
+    });
+        return !carouselCardsDescription.contains(false);
     }
 
     public void clickSecondCarouselCard() {

@@ -10,16 +10,16 @@
 
 
 
-    <parameter name="email" value="Test100111@gmail.com"></parameter>
+    <parameter name="email" value="Test100046@gmail.com"></parameter>
     <parameter name="password" value="Test12345"></parameter>
 
-    <test name="Espn Login Test" enabled="true" >
+    <test name="Espn Login Test" enabled="false" >
         <classes>
             <class name="org.espn.tests.EspnLoginTest" />
         </classes>
     </test>
 
-    <test name="Espn Logout Test" enabled="true" >
+    <test name="Espn Logout Test" enabled="false" >
         <classes>
             <class name="org.espn.tests.EspnLogoutTest" />
         </classes>
