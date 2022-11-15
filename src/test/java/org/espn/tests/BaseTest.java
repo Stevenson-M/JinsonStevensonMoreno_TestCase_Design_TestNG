@@ -2,7 +2,7 @@ package org.espn.tests;
 
 import static java.lang.String.format;
 import org.hamcrest.Matcher;
-import org.espn.pages.BasePage;
+import org.espn.pages.MainPage;
 import org.hamcrest.MatcherAssert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -13,10 +13,9 @@ import org.espn.reporting.Reporter;
 public class BaseTest {
 
     public Driver driver;
-    protected BasePage mainPage;
+    protected MainPage mainPage;
     protected final String userName = "Test";
     protected final String WelcomeMessageInNav = "Welcome" + userName + "!";
-    protected final String DeactivateAccountConfirmationTextWhenLogin = "Account Deactivated";
 
     @Parameters({"browser", "url"})
     @BeforeTest()
@@ -27,7 +26,7 @@ public class BaseTest {
         Reporter.info(format("Navigating to %s", url));
         driver.getDriver().get(url);
         driver.getDriver().manage().window().maximize();
-        mainPage = new BasePage(driver.getDriver());
+        mainPage = new MainPage(driver.getDriver());
     }
 
     @AfterTest

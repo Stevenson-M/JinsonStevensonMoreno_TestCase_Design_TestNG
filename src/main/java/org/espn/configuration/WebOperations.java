@@ -45,10 +45,6 @@ public class WebOperations {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void waitForVisibility(List<WebElement> elements) {
-        wait.until(ExpectedConditions.visibilityOfAllElements(elements));
-    }
-
     public void waitForClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }

@@ -80,6 +80,10 @@ public class WatchPage extends BasePage {
         getDriver().navigate().back();
     }
 
+    public void refreshPage() {
+        getDriver().navigate().refresh();
+    }
+
     public WatchPage(WebDriver driver) {
         super(driver);
     }
