@@ -1,6 +1,6 @@
 package org.espn.pages;
 
-
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -52,7 +52,17 @@ public class MainPage extends BasePage {
     @FindBy(id = "BtnCreateAccount")
     private WebElement SingUpButton;
 
-    String loginIframe = "oneid-iframe";
+    @FindBy (id = "oneid-iframe")
+    private WebElement loginIframe;
+
+    @FindBy (css = ".promo-banner-container iframe")
+    private WebElement bannerIframe;
+
+    @FindBy (css = "section.PromoBanner")
+    private WebElement bannerSection;
+
+    @FindBy (css = "div.PromoBanner__CloseBtn")
+    private WebElement bannerCloseButton;
 
     public void clickGlobalUserMenu() {
         clickElement(globalUserMenu);
@@ -158,6 +168,30 @@ public class MainPage extends BasePage {
 
     public void clickLoginButton() {
         clickElement(LoginButton);
+    }
+
+    public void switchToBannerIframe() {
+        super.getDriver().switchTo().frame(bannerIframe);
+    }
+
+    public void goOutFromBannerIframe() {
+        super.getDriver().switchTo().defaultContent();
+    }
+
+    public boolean verifyBanner() {
+        boolean isBanner = true;
+        try {
+             waitForVisibility(bannerSection);
+        } catch (TimeoutException e) {
+            isBanner = false;
+        }
+        return isBanner;
+    }
+
+    public void closeBanner() {
+        if (this.verifyBanner()) {
+            super.clickElement(this.bannerCloseButton);
+        }
     }
 
     public MainPage(WebDriver driver) {
