@@ -73,15 +73,13 @@ public class WatchPage extends BasePage {
     }
 
     public void clickCloseButtonCarouselPopUp() {
+        waitForVisibility(CloseButtonCarouselPopUp);
+        waitForClickable(CloseButtonCarouselPopUp);
         clickElement(CloseButtonCarouselPopUp);
     }
 
     public void returnToMainPage() {
         getDriver().navigate().back();
-    }
-
-    public void refreshPage() {
-        getDriver().navigate().refresh();
     }
 
     public WatchPage(WebDriver driver) {

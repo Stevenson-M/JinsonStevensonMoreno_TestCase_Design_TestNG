@@ -38,6 +38,6 @@ public class EspnDeactivateAccountTest extends BaseTest {
         mainPage.clickPasswordInput();
         mainPage.typePasswordInput(password);
         mainPage.clickLoginButton();
-        checkThat("Account deactivated text is present when you try to log in", mainPage.deleteAccountConfirmationTextWhenLogIn(), is("Account Deactivated"));
+        checkThat("Account deactivated text is present when you try to log in", mainPage.isAccountDeactivated(), is(true));
     }
 }

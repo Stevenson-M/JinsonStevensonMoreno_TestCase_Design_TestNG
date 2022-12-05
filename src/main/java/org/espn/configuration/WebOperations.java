@@ -4,6 +4,8 @@ import static org.openqa.selenium.support.PageFactory.initElements;
 
 import java.time.Duration;
 import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -47,5 +49,13 @@ public class WebOperations {
 
     public void waitForClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void waitForPresenceOfElement(String locator) {
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
+    }
+
+    public void refreshPage() {
+        getDriver().navigate().refresh();
     }
 }

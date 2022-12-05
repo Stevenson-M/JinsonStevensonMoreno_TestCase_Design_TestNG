@@ -10,11 +10,27 @@ public class MainPage extends BasePage {
     @FindBy(id = "global-user-trigger")
     private WebElement globalUserMenu;
 
-    @FindBy(css = "body.index.desktop.page-context-top.qa:nth-child(2) div.hidden-print:nth-child(3) header.espn-en.user-account-management.has-search nav:nth-child(3) ul.espn-en li.pillar.watch:nth-child(11) > a:nth-child(1)")
-    private WebElement watchButton;
-
     @FindBy(css="div.global-user:last-child ul.account-management > li:last-child > a")
     private WebElement loginUserMenuButton;
+
+    @FindBy (id = "oneid-iframe")
+    private WebElement loginIframe;
+
+    @FindBy(id = "BtnSubmit")
+    private WebElement LoginButton;
+
+    @FindBy(id = "BtnCreateAccount")
+    private WebElement SingUpButton;
+
+
+    @FindBy(css="input[type='email']")
+    private WebElement EmailInput;
+
+    @FindBy(id = "InputPassword")
+    private WebElement PasswordInput;
+
+    @FindBy(css = "body.index.desktop.page-context-top.qa:nth-child(2) div.hidden-print:nth-child(3) header.espn-en.user-account-management.has-search nav:nth-child(3) ul.espn-en li.pillar.watch:nth-child(11) > a:nth-child(1)")
+    private WebElement watchButton;
 
     @FindBy(css = "div.global-user:last-child ul.account-management > li:last-child > a")
     private WebElement LogOutButton;
@@ -34,26 +50,11 @@ public class MainPage extends BasePage {
     @FindBy (css = "#TextError + #BtnSubmit")
     private  WebElement DeactivateAccountConfirmationIframe;
 
-    @FindBy (css = ".account-deleted-gating + #Title")
+    @FindBy (css = "#Title > span")
     private  WebElement deleteAccountConfirmationTextWhenLogIn;
-
-    @FindBy(css="input[type='email']")
-    private WebElement EmailInput;
-
-    @FindBy(id = "InputPassword")
-    private WebElement PasswordInput;
-
-    @FindBy(id = "BtnSubmit")
-    private WebElement LoginButton;
 
     @FindBy(id = "logo")
     private WebElement EspnLogo;
-
-    @FindBy(id = "BtnCreateAccount")
-    private WebElement SingUpButton;
-
-    @FindBy (id = "oneid-iframe")
-    private WebElement loginIframe;
 
     @FindBy (css = ".promo-banner-container iframe")
     private WebElement bannerIframe;
@@ -77,9 +78,7 @@ public class MainPage extends BasePage {
         return new WatchPage(getDriver());
     }
 
-    public void refreshPage() {
-        getDriver().navigate().refresh();
-    }
+
     public void waitForGlobalUserMenu() {
         waitForVisibility(this.globalUserMenu);
     }
@@ -121,13 +120,20 @@ public class MainPage extends BasePage {
         clickElement(DeactivateAccountConfirmationIframe);
     }
 
-    public void goOutFromDeactivateAccountConfirmationIframe() {
-        super.getDriver().switchTo().defaultContent();
+    public boolean isAccountDeactivated()  {
+        String text = "";
+        String a = "Account Deactivated";
+        String b = "Find Your Account";
+
+        hoverElement(deleteAccountConfirmationTextWhenLogIn);
+        waitForVisibility(deleteAccountConfirmationTextWhenLogIn);
+        text = deleteAccountConfirmationTextWhenLogIn.getText();
+
+        return text.contains(a) || text.contains(b);
     }
 
-    public String deleteAccountConfirmationTextWhenLogIn() {
-        waitForVisibility(deleteAccountConfirmationTextWhenLogIn);
-        return deleteAccountConfirmationTextWhenLogIn.getText();
+    public void goOutFromDeactivateAccountConfirmationIframe() {
+        super.getDriver().switchTo().defaultContent();
     }
 
     public void changeToIframe(){
@@ -170,27 +176,26 @@ public class MainPage extends BasePage {
         clickElement(LoginButton);
     }
 
-    public void switchToBannerIframe() {
-        super.getDriver().switchTo().frame(bannerIframe);
-    }
-
-    public void goOutFromBannerIframe() {
-        super.getDriver().switchTo().defaultContent();
-    }
-
     public boolean verifyBanner() {
         boolean isBanner = true;
         try {
-             waitForVisibility(bannerSection);
+            super.waitForPresenceOfElement(".promo-banner-container iframe");
         } catch (TimeoutException e) {
             isBanner = false;
         }
         return isBanner;
     }
 
+    public void goOutFromBannerIframe() {
+        super.getDriver().switchTo().defaultContent();
+    }
+
     public void closeBanner() {
         if (this.verifyBanner()) {
+            super.getDriver().switchTo().frame(this.bannerIframe);
+            super.waitForVisibility(this.bannerSection);
             super.clickElement(this.bannerCloseButton);
+            this.goOutFromBannerIframe();
         }
     }
 
